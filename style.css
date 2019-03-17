@@ -1,0 +1,38 @@
+body, html {
+	height: 100%;
+}
+
+#main {
+	padding-top: 56px;
+}
+
+#main textarea {
+	font-family: monospace;
+}
+
+div {
+	border: 0px solid red;
+}
+
+.CodeMirror {
+	height: 100%;
+}
+
+.col-md-6, .col-md-12, .container-fluid {
+	padding: 0;
+}
+
+.row {
+	margin: 0;
+}
+
+.CodeMirror-gutters {
+	background: none;
+	border: 0;
+}
+
+.h6 {
+	font-size: 0.95rem;
+	color: black;
+	padding: 7px 0px 7px 10px;
+}

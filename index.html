@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Online msgpack converter</title>
+
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css" rel="stylesheet">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.44.0/codemirror.css" rel="stylesheet">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.44.0/addon/fold/foldgutter.css" rel="stylesheet">
+		<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+		<link href="style.css" rel="stylesheet">
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/msgpack-lite/0.1.26/msgpack.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.44.0/codemirror.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.44.0/addon/fold/foldcode.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.44.0/addon/fold/foldgutter.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.44.0/addon/fold/brace-fold.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.44.0/addon/fold/indent-fold.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.44.0/addon/fold/comment-fold.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.44.0/mode/javascript/javascript.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.44.0/addon/selection/active-line.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.0/js.cookie.min.js"></script>
+		<script src="code.js"></script>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-dark bg-dark fixed-top">
+			<div class="row w-100">
+				<div class="col-md-6">
+					<a class="navbar-brand" href="#">JSON</a>
+					<button type="button" class="btn btn-primary btn-sm" onclick="javascript: reformat_json();">Re-format</button>
+					<button type="button" class="btn btn-primary btn-sm" onclick="javascript: compress_json();">Compress</button>
+				</div>
+
+				<div class="col-md-5">
+					<a class="navbar-brand" href="#">msgpack</a>
+
+					<span style="color: white;">Separator:&nbsp;</span>
+					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						<label class="btn btn-primary btn-sm"><input type="radio" name="separator" id="sep-none" autocomplete="off" onchange="javascript: on_radio_change(this);"> None</label>
+						<label class="btn btn-primary btn-sm active"><input type="radio" name="separator" id="sep-space" autocomplete="off" checked onchange="javascript: on_radio_change(this);"> Space</label>
+						<label class="btn btn-primary btn-sm"><input type="radio" name="separator" id="sep-dash" autocomplete="off" onchange="javascript: on_radio_change(this);"> Dash</label>
+						<label class="btn btn-primary btn-sm"><input type="radio" name="separator" id="sep-comma" autocomplete="off" onchange="javascript: on_radio_change(this);"> Comma</label>
+					</div>
+
+					<span style="color: white;">&nbsp;0x prefix:&nbsp;</span>
+					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						<label class="btn btn-primary btn-sm"><input type="radio" name="prefix" id="pref-on" autocomplete="off" onchange="javascript: on_radio_change(this);"> On</label>
+						<label class="btn btn-primary btn-sm active"><input type="radio" name="prefix" id="pref-off" autocomplete="off" checked onchange="javascript: on_radio_change(this);"> Off</label>
+					</div>
+				</div>
+				<div class="col-md-1 text-right">
+					<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">?</button>
+				</div>
+			</div>
+		</nav>
+
+		<div id="main" class="container-fluid h-100">
+			<div class="row h-100">
+				<div class="col-md-6 h-100" style="border-right: 1px solid gray;"><textarea class="form-control" id="json"></textarea></div>
+				<div class="col-md-6 h-100"><textarea class="form-control" id="msgpack"></textarea></div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">About</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					</div>
+
+					<div class="modal-body">
+						Msgpack <i class="fa fa-arrows-h"></i> JSON online converter.<br>
+						By arturo182<br>
+						<a href="https://twitter.com/arturo182" target="_blank"><i class="fa fa-2x fa-twitter-square"></i></a>
+						<a href="https://github.com/arturo182" target="_blank"><i class="fa fa-2x fa-github-square"></i></a><br><br>
+						Inspired by the msgpack-lite demo by <a href="https://github.com/kawanet" target="_blank">Yusuke Kawasaki</a>.
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
